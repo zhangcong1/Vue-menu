@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <title>Document</title>
+    <style>
+        *{
+            list-style: none;
+        }
+        .state{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="vue">
+        <custom-menu></custom-menu>
+    </div>
+
+    <script>
+        Vue.component("custom-menu",{
+            template:`
+            <ul class="menu">
+                <li v-for="item in data">
+                    <h3 @click="toggle(item)">{{item.title}}</h3>
+                    <p v-for="items in item.son" v-show="item.state">{{items}}</p>
+                </li>
+            </ul>
+            `,
+            data:function () {
+                return {
+                    data:[{title:"一级分类",state:true,son:["二级分类","二级分类","二级分类","二级分类"]},{title:"一级分类",state:true,son:["二级分类","二级分类"]},{title:"一级分类",state:true,son:["二级分类","二级分类","二级分类","二级分类"]},{title:"一级分类",state:true,son:["二级分类","二级分类"]}]
+                }
+            },
+            methods:{
+                toggle(item){
+                    item.state=!item.state;
+                }
+            }
+        })
+        new Vue({
+            el:".vue"
+        })
+    </script>
+</body>
+</html>
